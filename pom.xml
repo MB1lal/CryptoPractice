@@ -25,7 +25,8 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <browser>chrome</browser>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <browser>${browser}</browser>
                         <log4j.configurationFile>${project.basedir}/src/test/resources/log4j2.xml</log4j.configurationFile>
                     </systemPropertyVariables>
                 </configuration>

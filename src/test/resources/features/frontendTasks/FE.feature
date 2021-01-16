@@ -1,4 +1,4 @@
-Feature: coinmarket basic tests
+Feature: coin market basic tests
   This feature deals with three basic tasks
 
 
@@ -14,7 +14,7 @@ Feature: coinmarket basic tests
     Then Verify marked currencies are appearing in watchlist
 
 
-  Scenario:  Verify filtered data
+ Scenario:  Verify filtered data
     Given User navigates to the homepage
     And User hovers over cryptocurrencies
     And User clicks Coins button

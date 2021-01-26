@@ -82,52 +82,66 @@ public class backendTasks extends baseUtil{
     @Given("User gets info response for Etherium ID {int}")
     public void get_info_response_for_ETH(int id)
     {
+        logger.info("Getting info response for ETH");
         response = given()
                 .header("X-CMC_PRO_API_KEY", baseUtil.api_Key)
                 .param("id",id)
                 .get(baseUtil.baseURL + baseUtil.crypto_info)
                 .then().assertThat().statusCode(200)
                 .extract().response();
+        logger.info("Infor response for ETH received");
     }
 
     @Then("Verify logo URL is present")
     public void logo_URL_Verification()
     {
+        logger.info("Verifying logoURL presence");
         String logoURL = "https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png";
         Assert.assertEquals(response.jsonPath().get(apiPaths.logo_Path.getConfigPath()).toString(), logoURL);
+        logger.info("logoURL is present in response");
     }
 
     @And("Verify technical_doc URI is present")
     public void tech_URI_Verification()
     {
+        logger.info("Verifying techURI presence");
         String techURI = "[https://github.com/ethereum/wiki/wiki/White-Paper]";
         Assert.assertEquals(response.jsonPath().get(apiPaths.techDoc_Path.getConfigPath()).toString(), techURI);
+        logger.info("techURI exists in response");
     }
 
     @And("Verify symbol of currency is ETH")
     public void curr_symbol_verification()
     {
+        logger.info("Verifying symbol presence");
         String symbol = "ETH";
         Assert.assertEquals(response.jsonPath().get(apiPaths.symbol_Path.getConfigPath()).toString(),symbol);
+        logger.info("ETH symbol is present in response");
     }
 
     @And("Verify date added field")
     public void date_Field_Verification()
     {
+        logger.info("Verifying presence of date added field");
         String date = "2015-08-07T00:00:00.000Z";
         Assert.assertEquals(response.jsonPath().get(apiPaths.date_Path.getConfigPath()).toString(),date);
+        logger.info("date added field is present in response");
     }
 
     @And("Verify platform is null")
     public void platform_veriication()
     {
-        Assert.assertEquals(response.jsonPath().get(apiPaths.platform_Path.getConfigPath()),null);
+        logger.info("Verifying platform's value");
+        Assert.assertNull(response.jsonPath().get(apiPaths.platform_Path.getConfigPath()));
+        logger.info("platform's value is null in response as exepcted");
     }
 
     @And("Verify currency has mineable tag associated with it")
     public void mineable_tag_verification()
     {
+        logger.info("Verifying mineable tag presence");
         Assert.assertEquals(response.jsonPath().get(apiPaths.mineableTag_Path.getConfigPath()).toString(),"mineable");
+        logger.info("mineable tag is present in response");
     }
 
     @Given("User gets IDs for top 10 cryptocurrencies")

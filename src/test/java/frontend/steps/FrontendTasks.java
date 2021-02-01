@@ -19,7 +19,7 @@ public class FrontendTasks extends BaseUtil {
     }
 
 
-    @Given("User navigates to the HomePage")
+    @Given("User navigates to the homepage")
     public void userNavigatesToTheHomepage()
     {
         try{
@@ -54,7 +54,7 @@ public class FrontendTasks extends BaseUtil {
 
     }
 
-    @And("Add random 5-10 currencies to WatchlistPage")
+    @And("Add random 5-10 currencies to watchlist")
     public void selectRandomRows()
     {
         HomePage hp = new HomePage(base.driver);
@@ -62,7 +62,7 @@ public class FrontendTasks extends BaseUtil {
         hp.clickFavs();
     }
 
-    @Then("Verify marked currencies are appearing in WatchlistPage")
+    @Then("Verify marked currencies are appearing in watchlist")
     public void verifyMarkedCurrenciesAreAppearingInWatchlist() {
         HomePage hp = new HomePage(base.driver);
         logger.info("Opening page in new tab");
@@ -111,5 +111,6 @@ public class FrontendTasks extends BaseUtil {
         CoinsPage cp = new CoinsPage(base.driver);
         cp.filterVerification();
     }
+
 
 }

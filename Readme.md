@@ -13,13 +13,13 @@ These tests use Cucumber-Java.
 
 Front end tests can be executed by running the runner class or using following command in terminal :
 
-        mvn clean install -Dtest=frontend.driver.runner
+        mvn clean install -Dtest=frontend.driver.Runner
         
 2. Backend:
 
 Back end tests can be executed by running the runner class or using following command in terminal :
 
-        mvn clean install -Dtest=backend.driver.runner`
+        mvn clean install -Dtest=backend.driver.Runner`
 
 
 **Known Issues:**

@@ -1,17 +1,17 @@
 package frontend.steps;
 
 import com.aventstack.extentreports.gherkin.model.Feature;
-import frontend.base.extentReportUtil;
-import frontend.base.baseUtil;
-import frontend.helperLibs.methods;
+import frontend.base.BaseUtil;
+import frontend.base.ExtentReportUtil;
+import frontend.helperlibs.Methods;
 import io.cucumber.java.*;
 
-public class hook extends baseUtil {
+public class Hooks extends BaseUtil {
 
-    public frontend.base.baseUtil base;
+    public BaseUtil base;
 
-    frontend.base.extentReportUtil extentReportUtil = new extentReportUtil();
-    public hook(baseUtil base)
+    ExtentReportUtil extentreportutil = new ExtentReportUtil();
+    public Hooks(BaseUtil base)
     {
         this.base = base;
     }
@@ -20,12 +20,12 @@ public class hook extends baseUtil {
     public void InitializeTest(Scenario scenario)
     {
         try {
-            extentReportUtil.ExtentReport();
-            features = extentReportUtil.extent.createTest(Feature.class, scenario.getName());
-            scenarioDef = features.createNode(scenario.getName());
-            base.Driver = methods.getBrowser(); // Returns the browser
-            base.Driver.manage().window().maximize();
-            logger.info("Opening the browser: " + base.Driver.toString());
+            extentreportutil.ExtentReport();
+            features = extentreportutil.extent.createTest(Feature.class, scenario.getName());
+            scenario_def = features.createNode(scenario.getName());
+            base.driver = Methods.getBrowser(); // Returns the browser
+            base.driver.manage().window().maximize();
+            logger.info("Opening the browser: " + base.driver.toString());
         } catch (Exception e) {
             logger.error(e.toString());
         }
@@ -36,9 +36,9 @@ public class hook extends baseUtil {
     public void TestTearDown(Scenario scenario) {
         try
         {
-            extentReportUtil.FlushReport();
-            logger.info("Closing the browser: " + base.Driver.toString());
-            base.Driver.quit();
+            extentreportutil.FlushReport();
+            logger.info("Closing the browser: " + base.driver.toString());
+            base.driver.quit();
         }
         catch (Exception e)
         {
@@ -63,7 +63,7 @@ public class hook extends baseUtil {
         {
             try{
                 scenarioDef.createNode(gherkinWord, stepName).fail("Fail");
-                extentReportUtil.ExtentReportScreenshot(base.Driver, "Failed.");
+                ExtentReportUtil.ExtentReportScreenshot(base.Driver, "Failed.");
                 logger.error("Taking screenshot on test failure.");
 
 

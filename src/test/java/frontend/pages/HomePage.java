@@ -1,28 +1,31 @@
 package frontend.pages;
 
-import frontend.helperLibs.methods;
-import org.junit.Assert;
-import org.openqa.selenium.*;
+import frontend.helperlibs.Methods;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class homepage {
+public class HomePage {
 
     WebDriver driver;
     int waitTime = 60;
-    By tableBody = By.xpath("//*[contains(@class, 'cmc-table-homepage___2_guh')]/tbody");
-    By tableClass = By.xpath("//table[contains(@class, 'cmc-table-homepage___2_guh')]");
-    By watchlistBtn = By.xpath("//a[@href='/watchlist/' and @class='cmc-link']");
-    By favIcon = By.xpath("//table/*//span[@class= 'icon-Star']");
-    By cookieClose = By.className("cmc-cookie-policy-banner__close");
-    By cryptoTab = By.xpath("//button[text()='Cryptocurrencies' and contains(@class, '1a0iugo')]");
+    By table_body = By.xpath("//*[contains(@class, 'cmc-table-homepage___2_guh')]/tbody");
+    By table_class = By.xpath("//table[contains(@class, 'cmc-table-homepage___2_guh')]");
+    By watch_list_btn = By.xpath("//a[@href='/WatchlistPage/' and @class='cmc-link']");
+    By fav_icon = By.xpath("//table/*//span[@class= 'icon-Star']");
+    By cookie_close = By.className("cmc-cookie-policy-banner__close");
+    By crypto_tab = By.xpath("//button[text()='Cryptocurrencies' and contains(@class, '1a0iugo')]");
     By coin = By.xpath("//h6[text()='Coins']");
 
-    public homepage(WebDriver driver){
+    public HomePage(WebDriver driver){
 
         this.driver = driver;
     }
@@ -32,17 +35,17 @@ public class homepage {
     //Find number of rows in Cryptocurrencies
     public int findRows(){
         WebDriverWait wait = new WebDriverWait(driver,waitTime);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(tableClass));
-        return Integer.parseInt(driver.findElement(tableBody).getAttribute("childElementCount"))-1;
+        wait.until(ExpectedConditions.visibilityOfElementLocated(table_class));
+        return Integer.parseInt(driver.findElement(table_body).getAttribute("childElementCount"))-1;
     }
 
     public void clickFavs() {
         WebDriverWait wait = new WebDriverWait(driver,waitTime);
 
-        List<WebElement> favs = driver.findElements(favIcon);
+        List<WebElement> favs = driver.findElements(fav_icon);
 
         Collections.shuffle(favs); //Shuffle
-        int randomNumber = methods.getRandomNumber(5,10);
+        int randomNumber = Methods.getRandomNumber(5,10);
 
         for(int x=0;x<randomNumber;x++)
         {
@@ -50,7 +53,7 @@ public class homepage {
             Actions actions = new Actions(driver);
             actions.moveToElement(favs.get(x));
             actions.perform();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(favIcon));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(fav_icon));
             favs.get(x).click();
             try {
                 Thread.sleep(1000);
@@ -71,7 +74,7 @@ public class homepage {
     public void openWatchlistInNewTab()
     {
         WebDriverWait wait = new WebDriverWait(driver,waitTime);
-        String urlWatchlist = driver.findElement(watchlistBtn).getAttribute("href");
+        String urlWatchlist = driver.findElement(watch_list_btn).getAttribute("href");
         WebDriver newTab = driver.switchTo().newWindow(WindowType.TAB);
         newTab.get(urlWatchlist);
 
@@ -80,7 +83,7 @@ public class homepage {
     public void hoverCryptoTab()
     {
         Actions builder = new Actions(driver);
-        builder.moveToElement(driver.findElement(cryptoTab)).perform();
+        builder.moveToElement(driver.findElement(crypto_tab)).perform();
 
     }
 
@@ -92,8 +95,8 @@ public class homepage {
     public void closeCookieBanner()
     {
         WebDriverWait wait = new WebDriverWait(driver,waitTime);
-        driver.findElement(cookieClose).click();
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(cookieClose));
+        driver.findElement(cookie_close).click();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(cookie_close));
     }
 
 }

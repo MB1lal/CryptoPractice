@@ -1,17 +1,17 @@
-package frontend.helperLibs;
+package frontend.helperlibs;
 
-import frontend.config.configProperties;
+import frontend.config.ConfigProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class methods {
+public class Methods {
 
 
     public static WebDriver getBrowser()
@@ -48,7 +48,7 @@ public class methods {
     public static String getUrl()
     {
 
-        return configProperties.readPropertyFile("baseURL");
+        return ConfigProperties.readPropertyFile("baseURL");
 
     }
 
@@ -56,40 +56,39 @@ public class methods {
         return (int) ((Math.random() * (max - min)) + min);
     }
 
-    public static List<List<String>> getTableData(WebDriver driver, By tableElement)
+    public static List<List<String>> getTableData(WebDriver driver, By table_element)
     {
-        List<List<String>> dataTable = new ArrayList<>();
-        List<WebElement> webElementList;
-        webElementList = driver.findElements(tableElement);
+        List<List<String>> data_table = new ArrayList<>();
+        List<WebElement> web_element_list;
+        web_element_list = driver.findElements(table_element);
 
-        int rowCount = 0;
-        int colCount = 0;
+        int row_count = 0;
+        int col_count = 0;
         String counter = "1";
 
-        dataTable.add(new ArrayList<>());
+        data_table.add(new ArrayList<>());
 
-        for(int i=0;i<webElementList.size();i++)
+        for(int i=0;i<web_element_list.size();i++)
         {
-            if(counter.equals(webElementList.get(i).getText()))
+            if(counter.equals(web_element_list.get(i).getText()))
             {
-                dataTable.add(new ArrayList<>());
-                ++rowCount;
-                colCount = 0;
+                data_table.add(new ArrayList<>());
+                ++row_count;
+                col_count = 0;
                 counter = String.valueOf(Integer.parseInt(counter) + 1);
-                dataTable.get(rowCount).add(colCount, webElementList.get(i).getAttribute("innerText"));
-                colCount++;
+                data_table.get(row_count).add(col_count, web_element_list.get(i).getAttribute("innerText"));
+                col_count++;
             } else
             {
-                //dataTable.get(rowCount).add(String.valueOf(new ArrayList()));
-                dataTable.get(rowCount).add(colCount,webElementList.get(i).getAttribute("innerText"));
-                colCount++;
+                data_table.get(row_count).add(col_count,web_element_list.get(i).getAttribute("innerText"));
+                col_count++;
             }
         }
 
 
 
 
-        return dataTable;
+        return data_table;
     }
 
 }

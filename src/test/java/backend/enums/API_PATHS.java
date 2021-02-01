@@ -1,6 +1,6 @@
-package backend.ENUMs;
+package backend.enums;
 
-public enum apiPaths {
+public enum API_PATHS {
 
     logo_Path("data.1027.logo"),
     techDoc_Path("data.1027.urls.technical_doc"),
@@ -16,7 +16,7 @@ public enum apiPaths {
         return path;
     }
 
-    apiPaths(String str)
+    API_PATHS(String str)
     {
         path = str;
     }

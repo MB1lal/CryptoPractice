@@ -15,11 +15,11 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="backend.driver.runner" level="trace" additivity="false">
+        <Logger name="backend.driver.Runner" level="trace" additivity="false">
             <AppenderRef ref="LogToConsole"/>
             <AppenderRef ref="LogToFile"/>
         </Logger>
-        <Logger name="frontend.backend.driver.runner.TestRunner" level="trace" additivity="false">
+        <Logger name="frontend.backend.driver.Runner.TestRunner" level="trace" additivity="false">
             <AppenderRef ref="LogToConsole"/>
         </Logger>
         <Root level="error">
